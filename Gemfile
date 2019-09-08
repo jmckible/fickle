@@ -5,7 +5,7 @@ ruby '2.6.3'
 
 gem 'bcrypt', '3.1.13'
 gem 'bootsnap', '1.4.5', require: false
-gem 'bootstrap', '4.1.3'
+gem 'bootstrap', '4.3.1'
 gem 'haml', '5.1.2'
 gem 'local_time', '2.1.0'
 gem 'parser', '2.6.3.0'
