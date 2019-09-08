@@ -1,0 +1,44 @@
+%p= link_to 'Back', root_path
+
+%h1= @poll.name
+
+- @poll.choices.abc.each do |c|
+  %p
+    - if c.live?
+      = link_to c.name, c
+    - else
+      %strike= link_to c.name, c
+
+
+%h3 Add a choice
+= form [@poll, Choice.new] do |f|
+  = f.text_field :name
+  = f.submit 'Add'
+
+
+%h2 Vote
+
+
+.ballot{ data: { controller: 'ballot' } }
+  = form [@poll, Ballot.new] do |f|
+    %h3 Choices
+    %ul.choices{ data: { target: 'ballot.choices' } }
+      - @poll.choices.live.each do |c|
+        = f.fields_for 'rankings[]', Ranking.new(choice: c) do |rf|
+          %li{ data: { ballot: { choice_id: c.id }}}
+            = rf.hidden_field :choice_id
+            = c.name
+
+  = form [@poll, Ballot.new] do |f|
+    %h3 Ranking
+    %ol.rankings{ data: { target: 'ballot.rankings' } }
+    = f.submit 'Submit'
+
+
+%h2 Past Ballots
+
+- Current.user.ballots.for(@poll).newest_first.each do |b|
+  = local_time b.created_at
+  %ol
+    - b.rankings.includes(:choice).each do |r|
+      %li= r.choice.name

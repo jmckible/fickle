@@ -1,0 +1,7 @@
+%h1= @poll.name
+%h2= @choice.name
+
+= form @choice do |f|
+  = f.text_field :name
+  = f.check_box :live
+  = f.submit 'Update'

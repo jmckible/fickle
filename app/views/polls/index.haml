@@ -1,0 +1,7 @@
+%p= link_to 'New Poll', [:new, :poll]
+
+
+%h2 My Polls
+
+- Current.user.polls.each do |poll|
+  %p= link_to poll.name, poll
