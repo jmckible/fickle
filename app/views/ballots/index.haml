@@ -1,0 +1,10 @@
+%p= link_to 'Back', @poll
+
+%h2 Voting History
+
+
+- @ballots.each do |b|
+  %p= local_time b.created_at
+  %ol
+    - b.rankings.includes(:choice).each do |r|
+      %li= r.choice.name

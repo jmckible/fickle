@@ -1,5 +1,10 @@
 class BallotsController < ApplicationController
 
+  def index
+    @poll = Current.user.polls.find_by slug: params[:poll_id]
+    @ballots = @poll.ballots.newest_first
+  end
+
   def create
     @poll = Current.user.polls.find_by slug: params[:poll_id]
     @ballot = Current.user.ballots.build poll: @poll

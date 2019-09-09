@@ -3,30 +3,32 @@
 %h1= @poll.name
 %p= link_to 'Edit Choices', [:edit, @poll]
 %p= link_to 'Edit Participants', [@poll, :caucuses]
+%p= link_to 'Vote History', [@poll, :ballots]
 
 %h2 Vote
 
+.row.ballot{ data: { controller: 'ballot' } }
+  .col-sm
+    = form [@poll, Ballot.new] do |f|
+      %h3 Choices
+      %ul.choices{ data: { target: 'ballot.choices' } }
+        - @poll.choices.live.by_random.each do |c|
+          = f.fields_for 'rankings[]', Ranking.new(choice: c) do |rf|
+            %li{ data: { ballot: { choice_id: c.id }}}
+              = rf.hidden_field :choice_id
+              = c.name
 
-.ballot{ data: { controller: 'ballot' } }
-  = form [@poll, Ballot.new] do |f|
-    %h3 Choices
-    %ul.choices{ data: { target: 'ballot.choices' } }
-      - @poll.choices.live.by_random.each do |c|
-        = f.fields_for 'rankings[]', Ranking.new(choice: c) do |rf|
-          %li{ data: { ballot: { choice_id: c.id }}}
-            = rf.hidden_field :choice_id
-            = c.name
-
-  = form [@poll, Ballot.new] do |f|
-    %h3 Ranking
-    %ol.rankings{ data: { target: 'ballot.rankings' } }
-    = f.submit 'Submit'
+  .col-sm
+    = form [@poll, Ballot.new] do |f|
+      %h3 Ranking
+      %ol.rankings{ data: { target: 'ballot.rankings' } }
+      = f.submit 'Submit'
 
 
-%h2 Past Ballots
+- if Current.user.ballots.latest
 
-- Current.user.ballots.for(@poll).newest_first.each do |b|
-  = local_time b.created_at
+  %h2 Last Ballot
+  %p= local_time Current.user.ballots.latest.created_at
   %ol
-    - b.rankings.includes(:choice).each do |r|
+    - Current.user.ballots.latest.rankings.includes(:choice).each do |r|
       %li= r.choice.name
