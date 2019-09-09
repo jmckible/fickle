@@ -5,6 +5,7 @@ class PollsController < ApplicationController
 
   def show
     @poll = Current.user.polls.find_by slug: params[:id]
+    @last_ballot = Current.user.ballots.for(@poll).includes(rankings: :choice).newest_first.first
   end
 
   def edit

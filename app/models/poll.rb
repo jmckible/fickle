@@ -7,6 +7,8 @@ class Poll < ApplicationRecord
 
   has_many :users, through: :caucuses
 
+  scope :live, -> { where(live: true) }
+
   def to_param
     slug
   end

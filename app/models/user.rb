@@ -12,5 +12,16 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def reminders_due(since: 1.day.ago)
+    [].tap do |due|
+      polls.live.each do |poll|
+        ballot = ballots.for(poll).newest_first.first
+        if ballot.nil? || ballot.created_at < since
+          due << poll
+        end
+      end
+    end
+  end
+
   validates :first_name, :last_name, :email, presence: true
 end

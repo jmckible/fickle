@@ -25,10 +25,9 @@
       = f.submit 'Submit'
 
 
-- if Current.user.ballots.latest
-
+- if @last_ballot
   %h2 Last Ballot
-  %p= local_time Current.user.ballots.latest.created_at
+  %p= local_time @last_ballot.created_at
   %ol
-    - Current.user.ballots.latest.rankings.includes(:choice).each do |r|
+    - @last_ballot.rankings.each do |r|
       %li= r.choice.name
