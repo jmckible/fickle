@@ -8,7 +8,13 @@ module TimeZone
   private
 
   def set_time_zone
-    Time.zone = (cookies[:time_zone].presence || 'UTC').delete('"')
+    zone = (cookies[:time_zone].presence || 'UTC').delete('"')
+
+    if zone == 'America/Los_Angeles'
+      zone = 'Pacific Time (US & Canada)'
+    end
+
+    Time.zone = zone
   end
 
 end

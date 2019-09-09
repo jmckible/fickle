@@ -1,0 +1,16 @@
+%p= link_to 'Back', @poll
+
+%h1= @poll.name
+
+- @poll.choices.abc.each do |c|
+  %p
+    - if c.live?
+      = link_to c.name, c
+    - else
+      %strike= link_to c.name, c
+
+
+%h3 Add a choice
+= form [@poll, Choice.new] do |f|
+  = f.text_field :name
+  = f.submit 'Add'

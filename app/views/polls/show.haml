@@ -1,20 +1,8 @@
 %p= link_to 'Back', root_path
 
 %h1= @poll.name
-
-- @poll.choices.abc.each do |c|
-  %p
-    - if c.live?
-      = link_to c.name, c
-    - else
-      %strike= link_to c.name, c
-
-
-%h3 Add a choice
-= form [@poll, Choice.new] do |f|
-  = f.text_field :name
-  = f.submit 'Add'
-
+%p= link_to 'Edit Choices', [:edit, @poll]
+%p= link_to 'Edit Participants', [@poll, :caucuses]
 
 %h2 Vote
 
@@ -23,7 +11,7 @@
   = form [@poll, Ballot.new] do |f|
     %h3 Choices
     %ul.choices{ data: { target: 'ballot.choices' } }
-      - @poll.choices.live.each do |c|
+      - @poll.choices.live.by_random.each do |c|
         = f.fields_for 'rankings[]', Ranking.new(choice: c) do |rf|
           %li{ data: { ballot: { choice_id: c.id }}}
             = rf.hidden_field :choice_id
@@ -42,16 +30,3 @@
   %ol
     - b.rankings.includes(:choice).each do |r|
       %li= r.choice.name
-
-
-%h2 Caucus
-- @poll.users.each do |u|
-  %p #{u.name} #{u.email}
-
-
-%h3 Invite
-
-= form [@poll, Caucus.new] do |f|
-  = f.fields_for :user do |uf|
-    = uf.text_field :email
-  = f.submit 'Invite'

@@ -7,6 +7,10 @@ class PollsController < ApplicationController
     @poll = Current.user.polls.find_by slug: params[:id]
   end
 
+  def edit
+    @poll = Current.user.polls.find_by slug: params[:id]
+  end
+
   def new
     @poll = Poll.new
   end

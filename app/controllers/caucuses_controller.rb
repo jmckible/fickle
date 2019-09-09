@@ -1,5 +1,9 @@
 class CaucusesController < ApplicationController
 
+  def index
+    @poll = Current.user.polls.find_by slug: params[:poll_id]
+  end
+
   def create
     @poll = Current.user.polls.find_by slug: params[:poll_id]
 
