@@ -42,3 +42,16 @@
   %ol
     - b.rankings.includes(:choice).each do |r|
       %li= r.choice.name
+
+
+%h2 Caucus
+- @poll.users.each do |u|
+  %p #{u.name} #{u.email}
+
+
+%h3 Invite
+
+= form [@poll, Caucus.new] do |f|
+  = f.fields_for :user do |uf|
+    = uf.text_field :email
+  = f.submit 'Invite'

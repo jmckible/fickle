@@ -7,4 +7,10 @@ class User < ApplicationRecord
 
   has_many :polls,   through: :caucuses
   has_many :choices, through: :polls
+
+  def name
+    "#{first_name} #{last_name}"
+  end
+
+  validates :first_name, :last_name, :email, presence: true
 end

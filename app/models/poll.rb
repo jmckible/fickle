@@ -2,7 +2,10 @@ class Poll < ApplicationRecord
   belongs_to :creator, class_name: 'User'
 
   has_many :ballots
+  has_many :caucuses
   has_many :choices
+
+  has_many :users, through: :caucuses
 
   def to_param
     slug
@@ -11,3 +14,4 @@ class Poll < ApplicationRecord
   validates :name, presence: true
   validates :slug, presence: true, uniqueness: true
 end
+1

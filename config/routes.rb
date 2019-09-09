@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :polls, shallow: true do
     resources :ballots
+    resources :caucuses
     resources :choices
   end
 
