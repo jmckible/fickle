@@ -12,7 +12,7 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
-  def reminders_due(since: 1.day.ago)
+  def reminders_due(since: 16.hours.ago)
     [].tap do |due|
       polls.live.each do |poll|
         ballot = ballots.for(poll).newest_first.first

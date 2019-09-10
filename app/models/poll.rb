@@ -16,4 +16,3 @@ class Poll < ApplicationRecord
   validates :name, presence: true
   validates :slug, presence: true, uniqueness: true
 end
-1
