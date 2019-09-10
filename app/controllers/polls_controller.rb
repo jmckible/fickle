@@ -27,7 +27,7 @@ class PollsController < ApplicationController
   protected
 
   def poll_params
-    params.fetch(:poll, {}).permit(:name, :slug)
+    params.fetch(:poll, {}).permit(:live, :name, :slug)
   end
 
 end
