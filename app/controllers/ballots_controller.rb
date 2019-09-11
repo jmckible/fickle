@@ -2,7 +2,7 @@ class BallotsController < ApplicationController
 
   def index
     @poll = Current.user.polls.find_by slug: params[:poll_id]
-    @ballots = @poll.ballots.newest_first
+    @ballots = @poll.ballots.where(user: Current.user).newest_first
   end
 
   def create
