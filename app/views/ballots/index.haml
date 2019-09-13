@@ -1,7 +1,16 @@
 %p= link_to 'Back', @poll
 
-%h2 Voting History
+%h2 Personal Results
+- @tally.rounds.each do |round|
+  %h3 Round #{round.number}
+  - round.results.each do |result|
+    %p #{result.first.name}: #{result.last}
+  %p Result: Winner #{'not' unless round.winner_selected?} selected
+  %p Leader: #{round.leader&.name}
+  %p Eliminated: #{round.newly_eliminated.collect(&:name).join(', ')}
 
+
+%h2 Voting History
 
 - @ballots.each do |b|
   %p= local_time b.created_at
