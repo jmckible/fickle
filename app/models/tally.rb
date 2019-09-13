@@ -1,12 +1,13 @@
 class Tally
 
-  attr_accessor :ballots, :poll, :rounds
+  attr_accessor :ballots, :poll, :rounds, :weighted
 
   def initialize(ballots)
     self.ballots = ballots
     self.poll    = ballots.first.poll
 
     calculate_rounds
+    calculate_weighted
   end
 
   def calculate_rounds
@@ -27,9 +28,25 @@ class Tally
 
       solve = false if round.winner_selected? || number > @poll.choices.count
     end
-
-
     @rounds
+  end
+
+  def calculate_weighted
+    @weighted = {}
+
+    weight = @poll.choices.count
+
+    @poll.choices.each do |choice|
+      @weighted[choice] = 0
+    end
+
+    @ballots.each do |ballot|
+      ballot.rankings.each do |ranking|
+        @weighted[ranking.choice] = @weighted[ranking.choice] + (weight - ranking.position - 1)
+      end
+    end
+
+    @weighted = @weighted.sort_by(&:last).reverse
   end
 
 end

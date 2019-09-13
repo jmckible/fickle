@@ -1,14 +1,19 @@
 %p= link_to 'Back', @poll
 
 %h2 Personal Results
+
+%h3 Stack Rank
 - @tally.rounds.each do |round|
-  %h3 Round #{round.number}
+  %h4 Round #{round.number}
   - round.results.each do |result|
     %p #{result.first.name}: #{result.last}
   %p Result: Winner #{'not' unless round.winner_selected?} selected
   %p Leader: #{round.leader&.name}
   %p Eliminated: #{round.newly_eliminated.collect(&:name).join(', ')}
 
+%h3 Weighted
+- @tally.weighted.each do |option|
+  %p #{option.first.name}: #{option.last}
 
 %h2 Voting History
 
