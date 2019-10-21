@@ -21,5 +21,6 @@
 %br
 
 = form @poll do |f|
+  = f.text_field :slug
   = f.check_box :live, label: 'Poll is live'
   = f.submit 'Save'

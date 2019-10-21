@@ -24,6 +24,12 @@ class PollsController < ApplicationController
     redirect_to root_url, notice: 'Poll created'
   end
 
+  def update
+    @poll = Current.user.polls.find_by slug: params[:id]
+    @poll.update poll_params
+    redirect_to [:edit, @poll], notice: 'Poll updated'
+  end
+
   protected
 
   def poll_params
