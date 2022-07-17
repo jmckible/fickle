@@ -3,4 +3,8 @@
   %p= f.password_field :password, placeholder: 'Password'
   %p= f.submit 'Login'
 
+%p or
+
+= google_sign_in_button 'Sign in with my Google account', proceed_to: google_login_url 
+
 %p= flash[:alert]

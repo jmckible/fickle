@@ -13,4 +13,18 @@ class SessionsController < ApplicationController
     end
   end
 
+  def google
+    id = flash[:google_sign_in]['id_token']
+    google = GoogleSignIn::Identity.new id
+
+    user = User.find_by email: google.email
+    unless user
+      user = User.new email: google.email, first_name: google.given_name, last_name: google.family_name
+      user.save!
+    end
+
+    cookies.encrypted[:user_id] = user.id
+    redirect_to root_url
+  end
+
 end

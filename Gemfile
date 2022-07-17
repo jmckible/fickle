@@ -1,31 +1,32 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.3'
+ruby '3.1.1'
 
-gem 'bcrypt', '3.1.13'
-gem 'bootsnap', '1.4.5', require: false
-gem 'bootstrap', '4.3.1'
-gem 'haml', '5.1.2'
+gem 'bcrypt', '3.1.16'
+gem 'bootsnap', '1.9.3', require: false
+gem 'bootstrap', '5.1.3'
+gem 'google_sign_in', '1.2.1'
+gem 'haml', '5.2.2'
 gem 'local_time', '2.1.0'
-gem 'mailgun-ruby', '1.2.0'
-gem 'parser', '2.6.3.0'
-gem 'pg', '1.1.4'
-gem 'puma', '4.0.1'
-gem 'rails', '6.0.0'
-gem 'sassc-rails', '2.1.2'
+gem 'mailgun-ruby', '1.2.5'
+gem 'parser', '3.1.1.0'
+gem 'pg', '1.4.1'
+gem 'puma', '5.5.2'
+gem 'rails', '7.0.3'
+gem 'sass-rails', '6.0.0'
 gem 'turbolinks', '5.2.0'
-gem 'webpacker', '4.0.7'
+gem 'webpacker', '5.4.0'
 
 group :development, :test do
-  gem 'byebug', '11.0.1'
-  gem 'haml_lint', '0.33.0'
-  gem 'rubocop', '0.74.0'
-  gem 'rubocop-rails', '2.3.0'
+  gem 'debug', '1.3.4', platforms: %i[mri mingw x64_mingw]
+  gem 'haml_lint', '0.40.0'
+  gem 'rspec-rails', '5.0.2'
+  gem 'rubocop', '1.26.0'
+  gem 'rubocop-rails', '2.14.2', require: false
 end
 
 group :development do
-  gem 'listen', '3.1.5'
-  gem 'spring-watcher-listen', '2.0.1'
-  gem 'web-console', '4.0.1'
+  gem 'listen', '3.5.1'
+  gem 'web-console', '4.2.0'
 end
