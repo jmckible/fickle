@@ -5,7 +5,7 @@ ruby '3.1.1'
 
 gem 'bcrypt', '3.1.16'
 gem 'bootsnap', '1.9.3', require: false
-gem 'bootstrap', '5.1.3'
+gem 'bootstrap', '4.4.1'
 gem 'google_sign_in', '1.2.1'
 gem 'haml', '5.2.2'
 gem 'local_time', '2.1.0'
