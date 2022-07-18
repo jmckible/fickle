@@ -11,7 +11,7 @@
   .col-sm
     = form [@poll, Ballot.new] do |f|
       %h3 Choices
-      %ul.choices{ data: { target: 'ballot.choices' } }
+      %ul.choices{ data: { ballot_target: 'choices' } }
         - @poll.choices.live.by_random.each do |c|
           = f.fields_for 'rankings[]', Ranking.new(choice: c) do |rf|
             %li{ data: { ballot: { choice_id: c.id }}}
@@ -21,7 +21,7 @@
   .col-sm
     = form [@poll, Ballot.new] do |f|
       %h3 Ranking
-      %ol.rankings{ data: { target: 'ballot.rankings' } }
+      %ol.rankings{ data: { ballot_target: 'rankings' } }
       = f.submit 'Submit'
 
 

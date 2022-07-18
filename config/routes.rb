@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  get 'login', to: 'sessions#new', as: :login
+  get  'login',        to: 'sessions#new',    as: :login
   post 'authenticate', to: 'sessions#create', as: :authenticate
-  get  'google', to: 'sessions#google', as: :google_login
+  get  'login/google', to: 'sessions#google', as: :google_login
+  get  'logout',       to: 'sessions#logout', as: :logout
 
   resources :polls, shallow: true do
     resources :ballots

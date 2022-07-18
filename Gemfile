@@ -15,7 +15,6 @@ gem 'parser', '3.1.1.0'
 gem 'pg', '1.4.1'
 gem 'puma', '5.5.2'
 gem 'rails', '7.0.3'
-gem 'turbo-rails', '1.1.1'
 
 group :development, :test do
   gem 'debug', '1.3.4', platforms: %i[mri mingw x64_mingw]

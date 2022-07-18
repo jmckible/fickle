@@ -14,8 +14,14 @@ class ChoicesController < ApplicationController
 
   def update
     @choice = Current.user.choices.find params[:id]
-    @choice.update_attributes! choice_params
+    @choice.update choice_params
     redirect_to [:edit, @choice.poll], notice: 'Choice updated'
+  end
+
+  def destroy
+    @choice = Current.user.choices.find params[:id]
+    @choice.destroy
+    redirect_to [:edit, @choice.poll], notice: 'Choice deleted'
   end
 
   protected

@@ -1,8 +1,8 @@
-[data-controller*="ballot"] [data-target*="ballot.choices"] {
+[data-controller*="ballot"] [data-ballot-target*="choices"] {
 	 border: 1px dashed;
 	 min-height: 6em;
 }
-[data-controller*="ballot"] [data-target*="ballot.rankings"] {
+[data-controller*="ballot"] [data-ballot-target*="rankings"] {
 	 border: 1px dashed;
 	 min-height: 6em;
 }

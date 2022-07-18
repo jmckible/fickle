@@ -279,10 +279,6 @@ GEM
     thor (1.2.1)
     tilt (2.0.10)
     timeout (0.3.0)
-    turbo-rails (1.1.1)
-      actionpack (>= 6.0.0)
-      activejob (>= 6.0.0)
-      railties (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unf (0.1.4)
@@ -322,7 +318,6 @@ DEPENDENCIES
   rspec-rails (= 5.0.2)
   rubocop (= 1.26.0)
   rubocop-rails (= 2.14.2)
-  turbo-rails (= 1.1.1)
   web-console (= 4.2.0)
 
 RUBY VERSION
