@@ -12,4 +12,6 @@
 = form [@poll, Caucus.new] do |f|
   = f.fields_for :user do |uf|
     = uf.text_field :email
+    = uf.text_field :first_name
+    = uf.text_field :last_name
   = f.submit 'Invite'

@@ -8,12 +8,16 @@ class CaucusesController < ApplicationController
     @poll = Current.user.polls.find_by slug: params[:poll_id]
 
     user = User.find_by email: params.fetch(:caucus, {}).permit(user: [:email])[:user][:email]
-    if user
-      caucus = @poll.caucuses.build user: user
-      caucus.save!
+    unless user
+      user = User.new params.fetch(:caucus, {}).permit(user: [:email, :first_name, :last_name])[:user]
+      user.save!
     end
+    caucus = @poll.caucuses.build user: user
+    caucus.save!
 
-    redirect_to @poll, notice: 'User successfully invited. They can log in to see this poll.'
+    redirect_to [@poll, :caucuses], notice: 'User successfully invited. They can log in to see this poll.'
+  rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotUnique
+    redirect_to [@poll, :caucuses], notice: 'Sorry, there was a problem.'
   end
 
 end
