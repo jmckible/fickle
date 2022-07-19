@@ -21,7 +21,7 @@ class PollsController < ApplicationController
     @poll.save!
     caucus = Current.user.caucuses.build poll: @poll
     caucus.save!
-    redirect_to root_url, notice: 'Poll created'
+    redirect_to @poll, notice: 'New poll created. Now add some choices.'
   end
 
   def update

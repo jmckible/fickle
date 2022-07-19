@@ -1,33 +1,36 @@
-%p= link_to 'Back', root_path
+%p= link_to '<- Back Home', root_path
 
 %h1= @poll.name
 %p= link_to 'Edit Choices', [:edit, @poll]
 %p= link_to 'Edit Participants', [@poll, :caucuses]
-%p= link_to 'Vote History', [@poll, :ballots]
+- if @poll.ballots.any?
+  %p= link_to 'Vote History', [@poll, :ballots]
 
-%h2 Vote
+- if @poll.choices.any?
+  %h2 Vote
+  %p To vote, drag a choice from the first column to the second column. Be sure to rank the second column in your preferred order. You don't need to rank all of the choices.
 
-.row.ballot{ data: { controller: 'ballot' } }
-  .col-sm
-    = form [@poll, Ballot.new] do |f|
-      %h3 Choices
-      %ul.choices{ data: { ballot_target: 'choices' } }
-        - @poll.choices.live.by_random.each do |c|
-          = f.fields_for 'rankings[]', Ranking.new(choice: c) do |rf|
-            %li{ data: { ballot: { choice_id: c.id }}}
-              = rf.hidden_field :choice_id
-              = c.name
+  .row.ballot{ data: { controller: 'ballot' } }
+    .col-sm
+      = form [@poll, Ballot.new] do |f|
+        %h3 Choices
+        %ul.choices{ data: { ballot_target: 'choices' } }
+          - @poll.choices.live.by_random.each do |c|
+            = f.fields_for 'rankings[]', Ranking.new(choice: c) do |rf|
+              %li{ data: { ballot: { choice_id: c.id }}}
+                = rf.hidden_field :choice_id
+                = c.name
 
-  .col-sm
-    = form [@poll, Ballot.new] do |f|
-      %h3 Ranking
-      %ol.rankings{ data: { ballot_target: 'rankings' } }
-      = f.submit 'Submit'
+    .col-sm
+      = form [@poll, Ballot.new] do |f|
+        %h3 Ranking
+        %ol.rankings{ data: { ballot_target: 'rankings' } }
+        = f.submit 'Submit My Ballot'
 
 
-- if @last_ballot
-  %h2 Last Ballot
-  %p= local_time @last_ballot.created_at
-  %ol
-    - @last_ballot.rankings.each do |r|
-      %li= r.choice.name
+  - if @last_ballot
+    %h2 Last Ballot
+    %p= local_time @last_ballot.created_at
+    %ol
+      - @last_ballot.rankings.each do |r|
+        %li= r.choice.name

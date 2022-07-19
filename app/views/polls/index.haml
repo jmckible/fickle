@@ -1,7 +1,8 @@
-%p= link_to 'New Poll', [:new, :poll]
+%p= link_to 'Create a New Poll', [:new, :poll]
 
 
-%h2 My Polls
+- if Current.user.polls.any?
+  %h2 My Polls
 
-- Current.user.polls.each do |poll|
-  %p= link_to poll.name, poll
+  - Current.user.polls.each do |poll|
+    %p= link_to poll.name, poll

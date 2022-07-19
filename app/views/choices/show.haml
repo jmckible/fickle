@@ -5,8 +5,8 @@
 
 = form @choice do |f|
   = f.text_field :name
-  = f.check_box :live
-  = f.submit 'Update'
+  = f.check_box :live, label: 'Include In Future Voting'
+  = f.submit 'Update Choice'
 
 
 %p or

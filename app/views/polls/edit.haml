@@ -1,27 +1,31 @@
-%p= link_to 'Back', @poll
+%p= link_to '<- Back', @poll
 
 %h1= @poll.name
 
-- @poll.choices.abc.each do |c|
-  %p
-    - if c.live?
-      = link_to c.name, c
-    - else
-      %strike= link_to c.name, c
+- if @poll.choices.any?
+  %h2 Current Choices
+  %p Click a choice to edit it
+  - @poll.choices.abc.each do |c|
+    %p
+      - if c.live?
+        = link_to c.name, c
+      - else
+        %strike= link_to c.name, c
 
 
-%h3 Add a choice
+%h3 Add A Choice
 = form [@poll, Choice.new] do |f|
   = f.text_field :name
-  = f.submit 'Add'
+  = f.submit 'Add New Choice'
 
 
 %br
 %br
 %br
 
+%h3 Edit Your Poll
 = form @poll do |f|
-  = f.text_field :name
-  = f.text_field :slug
-  = f.check_box :live, label: 'Poll is live'
-  = f.submit 'Save'
+  = f.text_field :name, label: 'Poll Title'
+  = f.text_field :slug, label: 'URL Parameter (do not worry about it)'
+  = f.check_box :live, label: "Send me a daily reminder to all participants to complete the poll"
+  = f.submit 'Update Poll'

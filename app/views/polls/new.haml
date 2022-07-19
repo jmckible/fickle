@@ -1,7 +1,7 @@
+%p= link_to '<- Back Home', root_path
+
 = form @poll do |f|
 
-  = f.text_field :name
+  = f.text_field :name, label: 'Name Your Poll'
 
-  = f.text_field :slug
-
-  = f.submit 'Create'
+  = f.submit 'Create New Poll'

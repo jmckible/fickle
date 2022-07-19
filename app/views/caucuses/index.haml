@@ -1,14 +1,13 @@
-%p= link_to 'Back', @poll
+%p= link_to '<- Back', @poll
 
 %h1= @poll.name
 
-
-%h2 Caucus
+%h2 Current Participants
 - @poll.users.each do |u|
   %p #{u.name} #{u.email}
 
 
-%h3 Invite
+%h3 Invite Participant
 
 = form [@poll, Caucus.new] do |f|
   = f.fields_for :user do |uf|
