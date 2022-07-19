@@ -33,12 +33,16 @@ export default class BallotContorller extends Controller {
     return document.querySelector(`[data-ballot-choice-id="${id}"]`)
   }
 
+  undo(event) {
+    this.choicesTarget.appendChild(event.currentTarget.closest('li'))
+  }
+
   addRanking(choiceId) {
     const choice = this.getChoiceById(event.dataTransfer.getData('application/drag-key'))
 
     if (choice.parentElement === this.choicesTarget) {
       this.rankingsTarget.appendChild(choice)
-    } else if (choice.parentElement === this.rankingsTarget){
+    } else if (choice.parentElement === this.rankingsTarget && event.target.closest('li')){
       const dropTarget = event.target.closest('li')
       switch (dropTarget.compareDocumentPosition(choice)) {
       case Node.DOCUMENT_POSITION_PRECEDING:

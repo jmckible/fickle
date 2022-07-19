@@ -2,6 +2,7 @@ class BallotsController < ApplicationController
 
   def index
     @poll = Current.user.polls.find_by slug: params[:poll_id]
+    redirect_to @poll and return unless @poll.ballots.any?
     @ballots = @poll.ballots.where(user: Current.user).newest_first
     @tally = Tally.new @ballots
   end
@@ -17,7 +18,13 @@ class BallotsController < ApplicationController
       ranking.save!
     end
 
-    redirect_to @poll, notice: 'Ballot cast'
+    redirect_to @poll, notice: 'Ballot successfully cast!'
+  end
+
+  def destroy
+    @ballot = Current.user.ballots.find params[:id]
+    @ballot.destroy
+    redirect_to [@ballot.poll, :ballots], notice: 'Ballot successfully deleted.'
   end
 
   protected

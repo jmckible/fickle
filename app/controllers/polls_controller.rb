@@ -27,7 +27,7 @@ class PollsController < ApplicationController
   def update
     @poll = Current.user.polls.find_by slug: params[:id]
     @poll.update poll_params
-    redirect_to [:edit, @poll], notice: 'Poll updated'
+    redirect_to [:edit, @poll], notice: 'Poll successfully updated.'
   end
 
   protected

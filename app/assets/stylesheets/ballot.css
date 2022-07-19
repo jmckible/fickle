@@ -1,8 +1,31 @@
-[data-controller*="ballot"] [data-ballot-target*="choices"] {
+
+.ballot ol, .ballot ul {
 	 border: 1px dashed;
 	 min-height: 6em;
+	 padding: 1em;
+	 font-size: 150%;
 }
-[data-controller*="ballot"] [data-ballot-target*="rankings"] {
-	 border: 1px dashed;
-	 min-height: 6em;
+
+.ballot .choices .undo {
+	display: none;
+}
+
+.ballot .undo {
+	float: right;
+}
+
+.ballot li {
+	 border: 1px solid black;
+	 min-width: 150px;
+	 -webkit-user-drag: element;
+	 -webkit-user-select: none;
+	 margin: 0.5em;
+	 padding: 1em;
+}
+
+
+.flash {
+	background-color: #0F0;
+	margin-bottom: 1em;
+	padding: 1em;
 }

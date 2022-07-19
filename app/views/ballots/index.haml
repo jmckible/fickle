@@ -18,7 +18,9 @@
 %h2 Voting History
 
 - @ballots.each do |b|
-  %p= local_time b.created_at
+  %p
+    = local_time b.created_at
+    = link_to 'Delete', b, method: :delete, data: { confirm: 'Are you sure you want to delete this ballot?' }
   %ol
     - b.rankings.includes(:choice).each do |r|
       %li= r.choice.name

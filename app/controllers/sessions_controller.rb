@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       cookies.encrypted[:user_id] = user.id
       redirect_to root_url
     else
-      redirect_to login_url, alert: 'Invalid credentials'
+      redirect_to login_url, notice: 'Invalid credentials'
     end
   end
 

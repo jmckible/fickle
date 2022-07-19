@@ -12,6 +12,11 @@
 
   %body
     .container
+
       %br
       %br
+
+      - if flash[:notice]
+        .flash= flash[:notice]
+
       = yield

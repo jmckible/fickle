@@ -13,7 +13,7 @@ class CaucusesController < ApplicationController
       caucus.save!
     end
 
-    redirect_to @poll, notice: 'User invited'
+    redirect_to @poll, notice: 'User successfully invited. They can log in to see this poll.'
   end
 
 end

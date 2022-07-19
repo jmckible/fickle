@@ -9,19 +9,19 @@ class ChoicesController < ApplicationController
     @poll = Current.user.polls.find_by slug: params[:poll_id]
     @choice = @poll.choices.build choice_params
     @choice.save!
-    redirect_to [:edit, @poll], notice: 'Choice added'
+    redirect_to [:edit, @poll], notice: 'Choice successfully added.'
   end
 
   def update
     @choice = Current.user.choices.find params[:id]
     @choice.update choice_params
-    redirect_to [:edit, @choice.poll], notice: 'Choice updated'
+    redirect_to [:edit, @choice.poll], notice: 'Choice successfully updated.'
   end
 
   def destroy
     @choice = Current.user.choices.find params[:id]
     @choice.destroy
-    redirect_to [:edit, @choice.poll], notice: 'Choice deleted'
+    redirect_to [:edit, @choice.poll], notice: 'Choice has been deleted along with any votes cast for it.'
   end
 
   protected
