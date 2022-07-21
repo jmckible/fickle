@@ -20,7 +20,8 @@
               %li{ data: { ballot: { choice_id: c.id }}}
                 = rf.hidden_field :choice_id
                 = c.name
-                .undo{ data: { action: 'click->ballot#undo ' } } x 
+                .add{ data:  { action: 'click->ballot#add'   } } +
+                .undo{ data: { action: 'click->ballot#undo ' } } x
 
     .col-sm
       = form [@poll, Ballot.new] do |f|

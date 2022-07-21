@@ -33,6 +33,10 @@ export default class BallotContorller extends Controller {
     return document.querySelector(`[data-ballot-choice-id="${id}"]`)
   }
 
+  add(event) {
+    this.rankingsTarget.appendChild(event.currentTarget.closest('li'))
+  }
+
   undo(event) {
     this.choicesTarget.appendChild(event.currentTarget.closest('li'))
   }
